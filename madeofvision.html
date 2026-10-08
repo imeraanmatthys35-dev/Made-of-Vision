@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MADE OF VISION — 3D Visual & Interactive Commerce</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,800;1,800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #030307;
+            --bg-card: rgba(18, 18, 28, 0.7);
+            --border-glow: rgba(168, 85, 247, 0.4);
+            --primary: #c084fc;
+            --secondary: #38bdf8;
+            --accent: #f43f5e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            overflow-x: hidden;
+            perspective: 1200px;
+        }
+
+        /* Background Animated Glows */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.25;
+            animation: floatOrb 15s infinite alternate ease-in-out;
+        }
+
+        .orb-1 {
+            top: -10%;
+            left: 20%;
+            width: 500px;
+            height: 500px;
+            background: #8b5cf6;
+        }
+
+        .orb-2 {
+            bottom: 10%;
+            right: 10%;
+            width: 600px;
+            height: 600px;
+            background: #0284c7;
+            animation-delay: -5s;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-50px) scale(1.15); }
+        }
+
+        /* ================= 3D TYPOGRAPHY UTILITIES ================= */
+        .td-word {
+            display: inline-block;
+            transform-style: preserve-3d;
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            cursor: default;
+        }
+
+        .td-word:hover {
+            transform: translateZ(40px) rotateX(10deg) rotateY(15deg);
+        }
+
+        h1, h2, h3, h4, .logo-text, .btn-3d, .nav-links a, .badge, .card-3d {
+            transform-style: preserve-3d;
+        }
+
+        /* 3D Multi-Layer Shadow Typography Effect */
+        .td-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-shadow: 
+                0 1px 0 #ccc,
+                0 2px 0 #c9c9c9,
+                0 3px 0 #bbb,
+                0 4px 0 #b9b9b9,
+                0 5px 0 #aaa,
+                0 6px 1px rgba(0,0,0,.1),
+                0 0 5px rgba(0,0,0,.1),
+                0 1px 3px rgba(0,0,0,.3),
+                0 3px 5px rgba(0,0,0,.2),
+                0 5px 10px rgba(0,0,0,.25),
+                0 10px 10px rgba(0,0,0,.2),
+                0 20px 20px rgba(0,0,0,.15);
+        }
+
+        .td-gradient {
+            background: linear-gradient(135deg, #fff 20%, var(--primary) 60%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(3, 3, 7, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transform: translateZ(50px);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #8b5cf6, #38bdf8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: white;
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.5);
+            transform: translateZ(30px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #fff;
+            transform: translateZ(20px);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            transform: translateZ(15px);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            transform: translateZ(25px) scale(1.05);
+        }
+
+        /* 3D Buttons */
+        .btn-3d {
+            position: relative;
+            display: inline-block;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4), inset 0 2px 0 rgba(255,255,255,0.4);
+            transform: translateZ(30px);
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .btn-3d:hover {
+            transform: translateZ(50px) translateY(-3px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.6), inset 0 2px 0 rgba(255,255,255,0.6);
+        }
+
+        .btn-3d.secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-3d.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 160px 20px 80px;
+            max-width: 1300px;
+            margin: 0 auto;
+            text-align: center;
+            transform-style: preserve-3d;
+        }
+
+        .hero-content {
+            transform: translateZ(60px);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 24px;
+            transform: translateZ(40px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            transform: translateZ(50px);
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto 40px;
+            transform: translateZ(30px);
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            transform: translateZ(40px);
+        }
+
+        /* Showcase Grid Section */
+        .section {
+            padding: 120px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            transform: translateZ(40px);
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            transform: translateZ(30px);
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(192, 132, 252, 0.3);
+            transform: translateZ(20px);
+        }
+
+        .grid-3d {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 32px;
+            transform-style: preserve-3d;
+        }
+
+        .card-3d {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transform: translateZ(40px);
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .card-3d:hover {
+            transform: translateZ(70px) rotateX(5deg) rotateY(5deg);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+        }
+
+        .card-img {
+            height: 240px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--bg-deep), transparent);
+        }
+
+        .card-body {
+            padding: 30px;
+            transform-style: preserve-3d;
+        }
+
+        .card-body h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            transform: translateZ(25px);
+        }
+
+        .card-body p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            transform: translateZ(15px);
+        }
+
+        .tag-list {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            transform: translateZ(20px);
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--secondary);
+            border-radius: 20px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        /* Services & Pricing Tiers */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+            transform-style: preserve-3d;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transform: translateZ(40px);
+            transition: all 0.4s;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(18, 18, 28, 0.9));
+            border-color: var(--primary);
+            transform: translateZ(60px);
+            box-shadow: 0 30px 60px rgba(139, 92, 246, 0.25);
+        }
+
+        .pricing-card:hover {
+            transform: translateZ(80px) translateY(-5px);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 20px 0;
+            color: #fff;
+            transform: translateZ(30px);
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 30px 0;
+            transform: translateZ(20px);
+        }
+
+        .features-list li {
+            padding: 10px 0;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Interactive Scope Estimator */
+        .estimator-box {
+            background: linear-gradient(135deg, rgba(18, 18, 28, 0.95), rgba(30, 20, 50, 0.8));
+            border: 1px solid var(--border-glow);
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 30px 80px rgba(139, 92, 246, 0.3);
+            transform-style: preserve-3d;
+            transform: translateZ(50px);
+        }
+
+        .estimator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        @media(max-width: 768px) {
+            .estimator-grid { grid-template-columns: 1fr; }
+        }
+
+        .range-group {
+            margin-bottom: 24px;
+            transform: translateZ(20px);
+        }
+
+        .range-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .range-group input[type="range"] {
+            width: 100%;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .total-display {
+            background: rgba(0,0,0,0.5);
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            transform: translateZ(30px);
+        }
+
+        .total-amount {
+            font-size: 3.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            color: var(--secondary);
+            margin: 10px 0;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 30px;
+            padding: 60px;
+            backdrop-filter: blur(20px);
+            transform-style: preserve-3d;
+            transform: translateZ(40px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            transform: translateZ(25px);
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 60px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            transform-style: preserve-3d;
+            background: #020205;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 16px 30px;
+            border-radius: 14px;
+            font-weight: 700;
+            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4);
+            transform: translateY(150px) translateZ(100px);
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0) translateZ(100px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <!-- Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo-area">
+                <div class="logo-icon">MV</div>
+                <span class="logo-text td-title">Made of Vision</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#work"><span class="td-word">Work</span></a></li>
+                <li><a href="#services"><span class="td-word">Services</span></a></li>
+                <li><a href="#estimator"><span class="td-word">Estimator</span></a></li>
+                <li><a href="#contact" class="btn-3d" style="padding: 10px 20px; font-size: 0.9rem;"><span class="td-word">Initiate Project</span></a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge td-title">✦ IMMERSIVE VISUAL & INTERACTIVE COMMERCE</div>
+            <h1 class="td-title"><span class="td-word">Architecting</span> <span class="td-word td-gradient">Dimensions</span> <span class="td-word">in Digital Commerce</span></h1>
+            <p><span class="td-word">We</span> <span class="td-word">sculpt</span> <span class="td-word">high-performance</span> <span class="td-word">web</span> <span class="td-word">ecosystems</span> <span class="td-word">where</span> <span class="td-word">audacious</span> <span class="td-word">design</span> <span class="td-word">meets</span> <span class="td-word">fearless</span> <span class="td-word">interactive</span> <span class="td-word">commerce.</span></p>
+            <div class="hero-cta">
+                <a href="#work" class="btn-3d"><span class="td-word">Explore Portfolio</span></a>
+                <a href="#estimator" class="btn-3d secondary"><span class="td-word">Calculate Scope</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Showcase Section -->
+    <section id="work" class="section">
+        <div class="section-header">
+            <h2 class="td-title"><span class="td-word">Featured</span> <span class="td-word td-gradient">Masterpieces</span></h2>
+            <p><span class="td-word">Selected</span> <span class="td-word">deployments</span> <span class="td-word">redefining</span> <span class="td-word">online</span> <span class="td-word">brand</span> <span class="td-word">experiences.</span></p>
+        </div>
+
+        <div class="filter-tabs">
+            <button class="filter-btn active" onclick="filterProjects('all')"><span class="td-word">All Projects</span></button>
+            <button class="filter-btn" onclick="filterProjects('ecommerce')"><span class="td-word">Interactive E-Commerce</span></button>
+            <button class="filter-btn" onclick="filterProjects('webapps')"><span class="td-word">Web Applications</span></button>
+            <button class="filter-btn" onclick="filterProjects('immersive')"><span class="td-word">3D & Immersive</span></button>
+        </div>
+
+        <div class="grid-3d" id="project-grid">
+            <div class="card-3d" data-category="ecommerce">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="card-body">
+                    <div class="tag-list">
+                        <span class="tag">E-Commerce</span>
+                        <span class="tag">WebGL</span>
+                    </div>
+                    <h3 class="td-title"><span class="td-word">Aether</span> <span class="td-word">Luxury</span> <span class="td-word">Apparel</span></h3>
+                    <p><span class="td-word">Next-gen</span> <span class="td-word">headless</span> <span class="td-word">storefront</span> <span class="td-word">featuring</span> <span class="td-word">real-time</span> <span class="td-word">3D</span> <span class="td-word">garment</span> <span class="td-word">customization.</span></p>
+                    <a href="#contact" class="btn-3d secondary" style="padding: 10px 20px; font-size: 0.85rem;"><span class="td-word">View Case Study</span></a>
+                </div>
+            </div>
+
+            <div class="card-3d" data-category="immersive">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="card-body">
+                    <div class="tag-list">
+                        <span class="tag">Immersive</span>
+                        <span class="tag">Spatial Audio</span>
+                    </div>
+                    <h3 class="td-title"><span class="td-word">Krono</span> <span class="td-word">Horology</span></h3>
+                    <p><span class="td-word">An</span> <span class="td-word">interactive</span> <span class="td-word">museum</span> <span class="td-word">experience</span> <span class="td-word">showcasing</span> <span class="td-word">Swiss</span> <span class="td-word">timepieces</span> <span class="td-word">in</span> <span class="td-word">macro</span> <span class="td-word">3D.</span></p>
+                    <a href="#contact" class="btn-3d secondary" style="padding: 10px 20px; font-size: 0.85rem;"><span class="td-word">View Case Study</span></a>
+                </div>
+            </div>
+
+            <div class="card-3d" data-category="webapps">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="card-body">
+                    <div class="tag-list">
+                        <span class="tag">Web App</span>
+                        <span class="tag">Fintech</span>
+                    </div>
+                    <h3 class="td-title"><span class="td-word">Nexus</span> <span class="td-word">Capital</span> <span class="td-word">Dashboard</span></h3>
+                    <p><span class="td-word">High-frequency</span> <span class="td-word">trading</span> <span class="td-word">interface</span> <span class="td-word">with</span> <span class="td-word">zero-latency</span> <span class="td-word">data</span> <span class="td-word">visualization</span> <span class="td-word">grids.</span></p>
+                    <a href="#contact" class="btn-3d secondary" style="padding: 10px 20px; font-size: 0.85rem;"><span class="td-word">View Case Study</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services & Pricing Section -->
+    <section id="services" class="section">
+        <div class="section-header">
+            <h2 class="td-title"><span class="td-word">Investment</span> <span class="td-word td-gradient">Tiers</span></h2>
+            <p><span class="td-word">Transparent</span> <span class="td-word">packages</span> <span class="td-word">engineered</span> <span class="td-word">for</span> <span class="td-word">measurable</span> <span class="td-word">market</span> <span class="td-word">dominance.</span></p>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3 class="td-title"><span class="td-word">Visionary</span> <span class="td-word">Launch</span></h3>
+                <p><span class="td-word">For</span> <span class="td-word">disruptive</span> <span class="td-word">startups</span> <span class="td-word">needing</span> <span class="td-word">exceptional</span> <span class="td-word">market</span> <span class="td-word">entry.</span></p>
+                <div class="price">$6,500</div>
+                <ul class="features-list">
+                    <li>Custom 3D Brand Identity</li>
+                    <li>Interactive Landing Page</li>
+                    <li>WebGL Animations</li>
+                    <li>Speed Optimization (99+ GTmetrix)</li>
+                </ul>
+                <a href="#contact" class="btn-3d secondary" style="width: 100%; text-align: center;"><span class="td-word">Select Tier</span></a>
+            </div>
+
+            <div class="pricing-card featured">
+                <div class="badge td-title" style="margin-bottom: 12px;">Most Popular</div>
+                <h3 class="td-title"><span class="td-word">Immersive</span> <span class="td-word">Commerce</span></h3>
+                <p><span class="td-word">For</span> <span class="td-word">high-growth</span> <span class="td-word">brands</span> <span class="td-word">seeking</span> <span class="td-word">unforgettable</span> <span class="td-word">sales</span> <span class="td-word">funnels.</span></p>
+                <div class="price">$14,200</div>
+                <ul class="features-list">
+                    <li>Full E-Commerce Architecture</li>
+                    <li>Interactive 3D Product Configurator</li>
+                    <li>Secure Checkout & Payment Gateway</li>
+                    <li>Headless CMS Integration</li>
+                    <li>Priority 24/7 Support</li>
+                </ul>
+                <a href="#contact" class="btn-3d" style="width: 100%; text-align: center;"><span class="td-word">Select Tier</span></a>
+            </div>
+
+            <div class="pricing-card">
+                <h3 class="td-title"><span class="td-word">Enterprise</span> <span class="td-word">Ecosystem</span></h3>
+                <p><span class="td-word">Custom</span> <span class="td-word">multi-platform</span> <span class="td-word">solutions</span> <span class="td-word">with</span> <span class="td-word">advanced</span> <span class="td-word">integrations.</span></p>
+                <div class="price">$28,000+</div>
+                <ul class="features-list">
+                    <li>Custom Web Application Development</li>
+                    <li>Advanced AI & Data Visualizations</li>
+                    <li>Multi-Region Cloud Deployment</li>
+                    <li>Dedicated Engineering Squad</li>
+                </ul>
+                <a href="#contact" class="btn-3d secondary" style="width: 100%; text-align: center;"><span class="td-word">Select Tier</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Scope Estimator -->
+    <section id="estimator" class="section">
+        <div class="estimator-box">
+            <div class="section-header" style="margin-bottom: 20px;">
+                <h2 class="td-title"><span class="td-word">Project</span> <span class="td-word td-gradient">Scope</span> <span class="td-word">Estimator</span></h2>
+                <p><span class="td-word">Customize</span> <span class="td-word">your</span> <span class="td-word">parameters</span> <span class="td-word">to</span> <span class="td-word">receive</span> <span class="td-word">an</span> <span class="td-word">instant</span> <span class="td-word">investment</span> <span class="td-word">forecast.</span></p>
+            </div>
+
+            <div class="estimator-grid">
+                <div>
+                    <div class="range-group">
+                        <label><span class="td-word">Pages / Views:</span> <span id="pages-val">5</span></label>
+                        <input type="range" id="pages-range" min="1" max="30" value="5" oninput="calculateEstimate()">
+                    </div>
+                    <div class="range-group">
+                        <label><span class="td-word">3D & Interactive Complexity:</span> <span id="complexity-val">Standard</span></label>
+                        <input type="range" id="complexity-range" min="1" max="3" value="2" oninput="calculateEstimate()">
+                    </div>
+                    <div class="range-group">
+                        <label><span class="td-word">Timeline Urgency:</span> <span id="timeline-val">Standard (4 Weeks)</span></label>
+                        <input type="range" id="timeline-range" min="1" max="3" value="1" oninput="calculateEstimate()">
+                    </div>
+                </div>
+
+                <div class="total-display">
+                    <span class="td-title" style="font-size: 0.9rem; color: var(--text-muted);">Estimated Investment</span>
+                    <div class="total-amount" id="total-price">$8,500</div>
+                    <a href="#contact" class="btn-3d" style="margin-top: 15px; padding: 10px 24px; font-size: 0.9rem;"><span class="td-word">Lock in Quote</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="section">
+        <div class="contact-container">
+            <div class="section-header" style="margin-bottom: 40px;">
+                <h2 class="td-title"><span class="td-word">Initiate</span> <span class="td-word td-gradient">Collaboration</span></h2>
+                <p><span class="td-word">Tell</span> <span class="td-word">us</span> <span class="td-word">about</span> <span class="td-word">your</span> <span class="td-word">vision.</span> <span class="td-word">We</span> <span class="td-word">respond</span> <span class="td-word">within</span> <span class="td-word">24</span> <span class="td-word">hours.</span></p>
+            </div>
+
+            <form id="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label><span class="td-word">Your Name</span></label>
+                    <input type="text" class="form-control" required placeholder="Alex Mercer">
+                </div>
+                <div class="form-group">
+                    <label><span class="td-word">Email Address</span></label>
+                    <input type="email" class="form-control" required placeholder="alex@visionary.com">
+                </div>
+                <div class="form-group">
+                    <label><span class="td-word">Project Vision & Goals</span></label>
+                    <textarea class="form-control" required placeholder="Describe your brand and interactive commerce goals..."></textarea>
+                </div>
+                <button type="submit" class="btn-3d" style="width: 100%; padding: 18px; font-size: 1.1rem;"><span class="td-word">Transmit Vision</span></button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div style="max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+            <div class="logo-area">
+                <div class="logo-icon" style="width: 36px; height: 36px; font-size: 1rem;">MV</div>
+                <span class="logo-text td-title" style="font-size: 1rem;">Made of Vision</span>
+            </div>
+            <p><span class="td-word">© 2026 Made of Vision. All rights reserved.</span> <span class="td-word">Engineered with 3D Visual Commerce.</span></p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">✨ Vision Transmitted Successfully! We will be in touch shortly.</div>
+
+    <script>
+        // Project Filter Function
+        function filterProjects(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.filter-btn').classList.add('active');
+
+            const cards = document.querySelectorAll('.card-3d');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Estimator Calculation Function
+        function calculateEstimate() {
+            const pages = parseInt(document.getElementById('pages-range').value);
+            const complexity = parseInt(document.getElementById('complexity-range').value);
+            const timeline = parseInt(document.getElementById('timeline-range').value);
+
+            document.getElementById('pages-val').innerText = pages;
+
+            let compText = 'Standard';
+            if (complexity === 1) compText = 'Light / Basic';
+            if (complexity === 2) compText = 'Immersive 3D & WebGL';
+            if (complexity === 3) compText = 'Full Custom Ecosystem';
+            document.getElementById('complexity-val').innerText = compText;
+
+            let timeText = 'Standard (4 Weeks)';
+            if (timeline === 1) timeText = 'Standard (4 Weeks)';
+            if (timeline === 2) timeText = 'Accelerated (2 Weeks)';
+            if (timeline === 3) timeText = 'Immediate Priority';
+            document.getElementById('timeline-val').innerText = timeText;
+
+            // Pricing formula
+            let basePrice = 3000;
+            let pageCost = pages * 450;
+            let compMultiplier = complexity * 2200;
+            let timeMultiplier = timeline === 3 ? 1.4 : (timeline === 2 ? 1.2 : 1.0);
+
+            let total = Math.round((basePrice + pageCost + compMultiplier) * timeMultiplier);
+            document.getElementById('total-price').innerText = '$' + total.toLocaleString();
+        }
+
+        // Form Submission & Toast
+        function handleSubmit(e) {
+            e.preventDefault();
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+            document.getElementById('contact-form').reset();
+        }
+
+        // 3D Tilt Effect on Mouse Move for Cards & 3D Words
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.clientX) / 50;
+            const y = (window.innerHeight / 2 - e.clientY) / 50;
+
+            document.querySelectorAll('.card-3d, .pricing-card, .estimator-box').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardX = rect.left + rect.width / 2;
+                const cardY = rect.top + rect.height / 2;
+                
+                if (Math.abs(e.clientX - cardX) < 400 && Math.abs(e.clientY - cardY) < 400) {
+                    const rotX = (e.clientY - cardY) / 20;
+                    const rotY = (cardX - e.clientX) / 20;
+                    card.style.transform = `translateZ(50px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+                } else {
+                    card.style.transform = `translateZ(40px) rotateX(0deg) rotateY(0deg)`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
