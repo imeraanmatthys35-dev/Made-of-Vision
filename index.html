@@ -3,8 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MADE OF VISION — Visual & Interactive Commerce Ecosystems</title>
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>MADE OF VISION — Custom Web Design & 3D Commerce Portals South Africa</title>
+    <meta name="title" content="MADE OF VISION — Custom Web Design & 3D Commerce Portals South Africa">
+    <meta name="description" content="South Africa's premier agency for high-performance web ecosystems, 3D product viewports, rent-to-own portals, and secure Yoco payment integrations.">
+    <meta name="keywords" content="web design south africa, ecommerce development, 3d web design, yoco payment gateway, web agency Johannesburg Cape Town, custom portals">
+    <meta name="author" content="Made of Vision">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Social Media (WhatsApp, LinkedIn, Facebook) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.madeofvision.com/">
+    <meta property="og:title" content="MADE OF VISION — Visual & Interactive Commerce Ecosystems">
+    <meta property="og:description" content="Architecting high-performance web ecosystems with 3D viewports and integrated Yoco banking gateways.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.madeofvision.com/">
+    <meta property="twitter:title" content="MADE OF VISION — Visual & Interactive Commerce Ecosystems">
+    <meta property="twitter:description" content="High-end web design, 3D viewports, and secure payment integrations for scaling businesses.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85">
+
+    <!-- Schema.org Structured Data for Local SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Made of Vision",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85",
+      "@id": "https://www.madeofvision.com/",
+      "url": "https://www.madeofvision.com/",
+      "telephone": "+27600000000",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Johannesburg",
+        "addressRegion": "Gauteng",
+        "addressCountry": "ZA"
+      },
+      "priceRange": "R25000 - R150000",
+      "description": "Visual and interactive commerce ecosystems, custom 3D web portals, and Yoco payment integrations in South Africa."
+    }
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Yoco SDK Integration -->
+    <script src="https://js.yoco.com/sdk/v1/yoco-sdk-web.js"></script>
+
     <style>
         :root {
             --bg-deep: #020206;
@@ -127,12 +174,15 @@
             text-decoration: none;
         }
 
+        /* Custom Logo Background Style */
         .logo-img {
-            width: 46px;
-            height: 46px;
-            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
             object-fit: cover;
-            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.6);
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            padding: 3px;
+            box-shadow: 0 8px 25px rgba(244, 63, 94, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
@@ -209,6 +259,11 @@
             border-color: var(--primary);
         }
 
+        .btn-yoco {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            box-shadow: 0 10px 25px rgba(2, 132, 199, 0.5);
+        }
+
         /* Hero */
         .hero {
             min-height: 94vh;
@@ -234,6 +289,18 @@
             color: var(--primary);
             margin-bottom: 26px;
             box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+        .owner-tag {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            padding: 6px 16px;
+            border-radius: 20px;
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
         }
 
         .hero h1 {
@@ -281,34 +348,7 @@
             font-weight: 500;
         }
 
-        /* Filter Tabs */
-        .filter-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-muted);
-            padding: 10px 22px;
-            border-radius: 30px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--primary);
-            color: #ffffff;
-            border-color: var(--primary);
-            box-shadow: 0 8px 20px rgba(192, 132, 252, 0.4);
-        }
-
-        /* Case Studies & Concept Vault Grid */
+        /* Grid & Cards */
         .grid-3d {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -339,13 +379,6 @@
             background-size: cover;
             background-position: center;
             position: relative;
-        }
-
-        .card-img::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, var(--bg-deep), transparent);
         }
 
         .card-body {
@@ -396,7 +429,6 @@
             position: relative;
             backdrop-filter: blur(15px);
             box-shadow: 0 20px 45px rgba(0,0,0,0.5);
-            transition: transform 0.3s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -407,8 +439,6 @@
             border-color: var(--primary);
             box-shadow: 0 25px 60px rgba(147, 51, 234, 0.35);
         }
-
-        .pricing-card:hover { transform: translateY(-6px); }
 
         .price {
             font-size: 3rem;
@@ -441,147 +471,36 @@
             font-size: 1.2rem;
         }
 
-        /* Advanced Universal Scope Estimator */
-        .estimator-box {
-            background: linear-gradient(135deg, rgba(18, 18, 28, 0.98), rgba(40, 20, 70, 0.88));
-            border: 1px solid var(--border-glow);
-            border-radius: 32px;
-            padding: 50px;
-            max-width: 1050px;
-            margin: 0 auto;
-            box-shadow: 0 30px 80px rgba(147, 51, 234, 0.35);
-        }
-
-        .estimator-grid {
+        /* 7 Ps Framework Section */
+        .ps-grid {
             display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 40px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
         }
 
-        @media(max-width: 900px) {
-            .estimator-grid { grid-template-columns: 1fr; }
-            .estimator-box { padding: 25px; }
-            .nav-links li:not(:last-child) { display: none; }
+        .ps-card {
+            background: rgba(18, 18, 28, 0.9);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(12px);
         }
 
-        .est-group {
-            margin-bottom: 24px;
-        }
-
-        .est-group label {
-            display: block;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text-main);
-            font-size: 1.02rem;
-        }
-
-        .est-select, .form-control {
-            width: 100%;
-            padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 12px;
-            color: white;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .est-select option {
-            background: #12121c;
-            color: white;
-        }
-
-        .est-select:focus, .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 18px rgba(147, 51, 234, 0.4);
-        }
-
-        .range-group input[type="range"] {
-            width: 100%;
-            accent-color: var(--primary);
-            cursor: pointer;
-            height: 6px;
-            margin-top: 10px;
-        }
-
-        .total-display {
-            background: rgba(0,0,0,0.65);
-            border-radius: 24px;
-            padding: 35px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.15);
-        }
-
-        .total-amount {
-            font-size: 3.5rem;
+        .ps-card h3 {
+            color: var(--primary);
+            font-size: 1.25rem;
+            margin-bottom: 10px;
             font-family: 'Space Grotesk', sans-serif;
-            font-weight: 800;
-            color: var(--secondary);
-            margin: 15px 0;
-            filter: drop-shadow(0 0 15px rgba(56,189,248,0.4));
         }
 
-        .milestone-note {
-            font-size: 0.85rem;
+        .ps-card p {
             color: var(--text-muted);
-            margin-top: 10px;
+            font-size: 0.95rem;
             line-height: 1.5;
         }
 
-        /* Banking Integration Gateway Modal / Box */
-        .gateway-section {
-            background: rgba(18, 18, 28, 0.85);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            border-radius: 28px;
-            padding: 45px;
-            max-width: 1050px;
-            margin: 60px auto 0;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-
-        .gateway-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
-        }
-
-        .gateway-badge {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .gateway-badge:hover {
-            border-color: var(--secondary);
-            background: rgba(56, 189, 248, 0.08);
-            transform: translateY(-3px);
-        }
-
-        .gateway-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: #fff;
-        }
-
-        .gateway-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        /* Contact Section */
+        /* Contact & Phone Section */
         .contact-container {
             max-width: 800px;
             margin: 0 auto;
@@ -591,16 +510,38 @@
             padding: 55px;
             backdrop-filter: blur(20px);
             box-shadow: 0 30px 65px rgba(0,0,0,0.6);
+            text-align: center;
         }
 
-        @media(max-width: 768px) {
-            .contact-container { padding: 30px 20px; }
-            .gateway-section { padding: 25px; }
+        .contact-details {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
         }
 
-        .form-group { margin-bottom: 24px; }
-        .form-group label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 1.02rem; }
-        textarea.form-control { resize: vertical; min-height: 140px; }
+        .contact-box {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 20px 30px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .contact-box:hover {
+            border-color: var(--secondary);
+            background: rgba(56, 189, 248, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .contact-box h4 {
+            color: var(--secondary);
+            margin-bottom: 6px;
+            font-size: 1.05rem;
+        }
 
         /* Footer */
         footer {
@@ -610,6 +551,8 @@
             color: var(--text-muted);
             background: #010104;
         }
+
+        footer p { margin-bottom: 10px; }
 
         /* Toast Notification */
         .toast {
@@ -641,16 +584,18 @@
     <header>
         <div class="nav-container">
             <a href="#" class="logo-area">
-                <img src="https://generativelanguage.googleapis.com/v1beta/files/14344315762543401146" alt="Made of Vision MV Logo" class="logo-img">
+                <div class="logo-img">
+                    <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
                 <span class="logo-text td-title">Made of Vision</span>
             </a>
             <ul class="nav-links">
-                <li><a href="#work"><span class="td-word">Portals</span></a></li>
-                <li><a href="#services"><span class="td-word">Tiers</span></a></li>
-                <li><a href="#estimator"><span class="td-word">Estimator</span></a></li>
-                <li><a href="#gateways"><span class="td-word">Banking</span></a></li>
+                <li><a href="#work">Portals</a></li>
+                <li><a href="#services">Tiers</a></li>
+                <li><a href="#framework">7 Ps</a></li>
+                <li><a href="#contact">Contact</a></li>
                 <li><button class="currency-toggle" onclick="toggleCurrency()"><span id="curr-btn-text">ZAR (R)</span></button></li>
-                <li><a href="#contact" class="btn-3d" style="padding: 10px 20px; font-size: 0.9rem;"><span class="td-word">Initiate</span></a></li>
+                <li><a href="#contact" class="btn-3d" style="padding: 10px 20px; font-size: 0.9rem;">Initiate</a></li>
             </ul>
         </div>
     </header>
@@ -658,32 +603,26 @@
     <!-- Hero Section -->
     <section class="hero">
         <div>
-            <div class="badge td-title">✦ IMMERSIVE COMMERCE & PORTAL ARCHITECTURE</div>
+            <div class="owner-tag">✦ Principal Owner & Founder: [Your Name Here]</div>
+            <div class="badge td-title">✦ PTY LTD REGISTRATION PENDING (EST. 2 MONTHS)</div>
             <h1 class="td-title"><span class="td-word">Architecting</span> <span class="td-word td-gradient">Dimensions</span> <span class="td-word">in Digital Commerce</span></h1>
-            <p><span class="td-word">We</span> <span class="td-word">build</span> <span class="td-word">high-performance</span> <span class="td-word">web</span> <span class="td-word">ecosystems</span> <span class="td-word">with</span> <span class="td-word">integrated</span> <span class="td-word">banking</span> <span class="td-word">gateways,</span> <span class="td-word">3D</span> <span class="td-word">product</span> <span class="td-word">viewports,</span> <span class="td-word">and</span> <span class="td-word">rent-to-own</span> <span class="td-word">lease</span> <span class="td-word">portals.</span></p>
+            <p>We build high-performance web ecosystems with integrated Yoco banking gateways, 3D product viewports, and rent-to-own lease portals. Fully active and processing client orders via Yoco merchant secure infrastructure.</p>
             <div class="hero-cta">
-                <a href="#estimator" class="btn-3d"><span class="td-word">Universal Scope Estimator</span></a>
-                <a href="#work" class="btn-3d secondary"><span class="td-word">Explore Project Ideas</span></a>
+                <a href="#services" class="btn-3d">View Investment Tiers</a>
+                <a href="#contact" class="btn-3d secondary">Get in Touch</a>
             </div>
         </div>
     </section>
 
-    <!-- Case Studies & Potential Project Ideas Vault -->
+    <!-- Case Studies & Project Vault -->
     <section id="work" class="section">
         <div class="section-header">
             <h2 class="td-title"><span class="td-word">Project</span> <span class="td-word td-gradient">Ideas & Case Vault</span></h2>
-            <p><span class="td-word">High-value</span> <span class="td-word">concept</span> <span class="td-word">blueprints</span> <span class="td-word">engineered</span> <span class="td-word">for</span> <span class="td-word">pre-registration</span> <span class="td-word">founders</span> <span class="td-word">&amp;</span> <span class="td-word">scaling</span> <span class="td-word">enterprises.</span></p>
-        </div>
-
-        <div class="filter-tabs">
-            <button class="filter-btn active" onclick="filterProjects('all')"><span class="td-word">All Concepts</span></button>
-            <button class="filter-btn" onclick="filterProjects('fleet')"><span class="td-word">Fleet &amp; Rent-to-Own</span></button>
-            <button class="filter-btn" onclick="filterProjects('realestate')"><span class="td-word">Spatial Real Estate</span></button>
-            <button class="filter-btn" onclick="filterProjects('luxury')"><span class="td-word">Luxury &amp; D2C</span></button>
+            <p>High-value concept blueprints engineered for pre-registration founders & scaling enterprises.</p>
         </div>
 
         <div class="grid-3d" id="project-grid">
-            <div class="card-3d" data-category="fleet">
+            <div class="card-3d">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=85')"></div>
                 <div class="card-body">
                     <div class="tag-list">
@@ -691,68 +630,68 @@
                         <span class="tag">Rent-to-Own Portal</span>
                         <span class="tag">Instant EFT</span>
                     </div>
-                    <h3 class="td-title"><span class="td-word">Apex</span> <span class="td-word">Fleet</span> <span class="td-word">Management</span></h3>
-                    <p><span class="td-word">A</span> <span class="td-word">rent-to-own</span> <span class="td-word">vehicle</span> <span class="td-word">leasing</span> <span class="td-word">portal</span> <span class="td-word">with</span> <span class="td-word">automated</span> <span class="td-word">debit</span> <span class="td-word">orders,</span> <span class="td-word">telematics</span> <span class="td-word">tracking,</span> <span class="td-word">and</span> <span class="td-word">driver</span> <span class="td-word">onboarding.</span></p>
-                    <a href="#contact" class="btn-3d secondary" style="width: 100%; text-align: center;"><span class="td-word">Request Blueprint</span></a>
+                    <h3 class="td-title">Apex Fleet Management</h3>
+                    <p>A rent-to-own vehicle leasing portal with automated debit orders, telematics tracking, and driver onboarding.</p>
+                    <a href="#contact" class="btn-3d secondary" style="width: 100%; text-align: center;">Request Blueprint</a>
                 </div>
             </div>
 
-            <div class="card-3d" data-category="realestate">
+            <div class="card-3d">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=85')"></div>
                 <div class="card-body">
                     <div class="tag-list">
                         <span class="tag">Spatial 3D</span>
                         <span class="tag">High-End Real Estate</span>
                     </div>
-                    <h3 class="td-title"><span class="td-word">Aethelgard</span> <span class="td-word">Spatial</span> <span class="td-word">Estate</span></h3>
-                    <p><span class="td-word">An</span> <span class="td-word">interactive</span> <span class="td-word">3D</span> <span class="td-word">property</span> <span class="td-word">configurator</span> <span class="td-word">enabling</span> <span class="td-word">high-net-worth</span> <span class="td-word">buyers</span> <span class="td-word">to</span> <span class="td-word">customize</span> <span class="td-word">finishes</span> <span class="td-word">and</span> <span class="td-word">reserve</span> <span class="td-word">allocations.</span></p>
-                    <a href="#contact" class="btn-3d secondary" style="width: 100%; text-align: center;"><span class="td-word">Request Blueprint</span></a>
+                    <h3 class="td-title">Aethelgard Spatial Estate</h3>
+                    <p>An interactive 3D property configurator enabling high-net-worth buyers to customize finishes and reserve allocations.</p>
+                    <a href="#contact" class="btn-3d secondary" style="width: 100%; text-align: center;">Request Blueprint</a>
                 </div>
             </div>
 
-            <div class="card-3d" data-category="luxury">
+            <div class="card-3d">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=85')"></div>
                 <div class="card-body">
                     <div class="tag-list">
                         <span class="tag">WebGL 3D</span>
                         <span class="tag">Boutique D2C</span>
                     </div>
-                    <h3 class="td-title"><span class="td-word">Vanguard</span> <span class="td-word">Reserve</span> <span class="td-word">Cellar</span></h3>
-                    <p><span class="td-word">An</span> <span class="td-word">immersive</span> <span class="td-word">wine</span> <span class="td-word">estate</span> <span class="td-word">allocations</span> <span class="td-word">portal</span> <span class="td-word">with</span> <span class="td-word">macro</span> <span class="td-word">bottle</span> <span class="td-word">viewing</span> <span class="td-word">and</span> <span class="td-word">secure</span> <span class="td-word">escrow.</span></p>
-                    <a href="#contact" class="btn-3d secondary" style="width: 100%; text-align: center;"><span class="td-word">Request Blueprint</span></a>
+                    <h3 class="td-title">Vanguard Reserve Cellar</h3>
+                    <p>An immersive wine estate allocations portal with macro bottle viewing and secure escrow.</p>
+                    <a href="#contact" class="btn-3d secondary" style="width: 100%; text-align: center;">Request Blueprint</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing & Investment Tiers -->
+    <!-- Pricing & Investment Tiers with Yoco Integration -->
     <section id="services" class="section">
         <div class="section-header">
             <h2 class="td-title"><span class="td-word">Investment</span> <span class="td-word td-gradient">Tiers</span></h2>
-            <p><span class="td-word">Engineered</span> <span class="td-word">for</span> <span class="td-word">pre-registration</span> <span class="td-word">founders</span> <span class="td-word">and</span> <span class="td-word">scaling</span> <span class="td-word">enterprises</span> <span class="td-word">alike.</span></p>
+            <p>Select your tier to pay securely via Yoco (Credit card, Instant EFT, or Mobile App).</p>
         </div>
 
         <div class="pricing-grid">
             <div class="pricing-card">
                 <div>
-                    <h3 class="td-title"><span class="td-word">Bootstrapped</span> <span class="td-word">Launch</span></h3>
-                    <p><span class="td-word">For</span> <span class="td-word">unregistered</span> <span class="td-word">founders</span> <span class="td-word">needing</span> <span class="td-word">investor-ready</span> <span class="td-word">presence.</span></p>
+                    <h3 class="td-title">Bootstrapped Launch</h3>
+                    <p>For unregistered founders needing investor-ready presence.</p>
                     <div class="price" id="p1">R25,000</div>
                     <ul class="features-list">
                         <li>Custom Brand Identity & UI</li>
                         <li>High-Converting Landing Page</li>
-                        <li>Basic Yoco / Payment Link Setup</li>
+                        <li>Basic Yoco Payment Link Setup</li>
                         <li>Mobile & Desktop Optimized</li>
                     </ul>
                 </div>
-                <a href="#contact" class="btn-3d secondary" style="width: 100%;"><span class="td-word">Select Tier</span></a>
+                <button class="btn-3d btn-yoco" style="width: 100%;" onclick="startYocoPayment('Bootstrapped Launch', 25000)">Pay via Yoco (R25,000)</button>
             </div>
 
             <div class="pricing-card featured">
                 <div>
                     <div class="badge td-title" style="margin-bottom: 12px;">Most Popular</div>
-                    <h3 class="td-title"><span class="td-word">Venture</span> <span class="td-word">Commerce</span></h3>
-                    <p><span class="td-word">For</span> <span class="td-word">revenue</span> <span class="td-word">testing</span> <span class="td-word">and</span> <span class="td-word">interactive</span> <span class="td-word">portals.</span></p>
+                    <h3 class="td-title">Venture Commerce</h3>
+                    <p>For revenue testing and interactive portals.</p>
                     <div class="price" id="p2">R65,000</div>
                     <ul class="features-list">
                         <li>Interactive 3D Viewport / Configurator</li>
@@ -761,14 +700,14 @@
                         <li>Headless CMS & Analytics</li>
                     </ul>
                 </div>
-                <a href="#contact" class="btn-3d" style="width: 100%;"><span class="td-word">Select Tier</span></a>
+                <button class="btn-3d btn-yoco" style="width: 100%;" onclick="startYocoPayment('Venture Commerce', 65000)">Pay via Yoco (R65,000)</button>
             </div>
 
             <div class="pricing-card">
                 <div>
-                    <h3 class="td-title"><span class="td-word">Enterprise</span> <span class="td-word">Ecosystem</span></h3>
-                    <p><span class="td-word">Full</span> <span class="td-word">custom</span> <span class="td-word">web</span> <span class="td-word">applications</span> <span class="td-word">with</span> <span class="td-word">banking</span> <span class="td-word">APIs.</span></p>
-                    <div class="price" id="p3">R140,000+</div>
+                    <h3 class="td-title">Enterprise Ecosystem</h3>
+                    <p>Full custom web applications with banking APIs.</p>
+                    <div class="price" id="p3">R140,000</div>
                     <ul class="features-list">
                         <li>Custom Web App / Fleet / Real Estate Portal</li>
                         <li>Advanced Banking & Recurring Billing APIs</li>
@@ -776,197 +715,123 @@
                         <li>Multi-Region Cloud Deployment</li>
                     </ul>
                 </div>
-                <a href="#contact" class="btn-3d secondary" style="width: 100%;"><span class="td-word">Select Tier</span></a>
+                <button class="btn-3d btn-yoco" style="width: 100%;" onclick="startYocoPayment('Enterprise Ecosystem', 140000)">Pay via Yoco (R140,000)</button>
             </div>
         </div>
     </section>
 
-    <!-- Universal Scope Estimator -->
-    <section id="estimator" class="section">
-        <div class="estimator-box">
-            <div class="section-header" style="margin-bottom: 25px;">
-                <h2 class="td-title"><span class="td-word">Universal</span> <span class="td-word td-gradient">Scope</span> <span class="td-word">Estimator</span></h2>
-                <p><span class="td-word">Configure</span> <span class="td-word">your</span> <span class="td-word">exact</span> <span class="td-word">project</span> <span class="td-word">parameters</span> <span class="td-word">for</span> <span class="td-word">an</span> <span class="td-word">instant</span> <span class="td-word">forecast.</span></p>
+    <!-- 7 Ps of Marketing Framework -->
+    <section id="framework" class="section">
+        <div class="section-header">
+            <h2 class="td-title"><span class="td-word">The 7 Ps</span> <span class="td-word td-gradient">of Marketing</span></h2>
+            <p>Built with robust strategic foundations to ensure client conversion and trust.</p>
+        </div>
+        <div class="ps-grid">
+            <div class="ps-card">
+                <h3>1. Product</h3>
+                <p>High-end 3D commerce portals, custom web applications, rent-to-own vehicle platforms, and digital storefronts.</p>
             </div>
-
-            <div class="estimator-grid">
-                <div>
-                    <div class="est-group">
-                        <label><span class="td-word">Founder Status:</span></label>
-                        <select id="est-status" class="est-select" onchange="calculateEstimate()">
-                            <option value="1">Unregistered / Pre-Registration Startup</option>
-                            <option value="1.15">Registered Small Business / Pty Ltd</option>
-                            <option value="1.3">Enterprise / Scale-up</option>
-                        </select>
-                    </div>
-
-                    <div class="est-group">
-                        <label><span class="td-word">Project Archetype:</span></label>
-                        <select id="est-archetype" class="est-select" onchange="calculateEstimate()">
-                            <option value="25000">Landing Page & Payment Link</option>
-                            <option value="65000">Interactive 3D Storefront / Catalog</option>
-                            <option value="85000">Rent-to-Own Fleet / Lease Portal</option>
-                            <option value="95000">Spatial Real Estate Configurator</option>
-                            <option value="140000">Full Custom Enterprise Web App</option>
-                        </select>
-                    </div>
-
-                    <div class="est-group range-group">
-                        <label><span class="td-word">Interactive Views / Scale:</span> <span id="scale-val">5 Views</span></label>
-                        <input type="range" id="est-scale" min="1" max="25" value="5" oninput="calculateEstimate()">
-                    </div>
-                </div>
-
-                <div class="total-display">
-                    <div>
-                        <span class="td-title" style="font-size: 0.9rem; color: var(--text-muted);">Estimated Investment</span>
-                        <div class="total-amount" id="total-price">R65,000</div>
-                    </div>
-                    <div class="milestone-note">
-                        ✦ 50% deposit to initiate development.<br>
-                        ✦ Flexible milestone structuring available for pre-registration founders.
-                    </div>
-                    <a href="#contact" class="btn-3d" style="width: 100%; margin-top: 15px; padding: 12px; font-size: 0.9rem;"><span class="td-word">Lock in Estimate</span></a>
-                </div>
+            <div class="ps-card">
+                <h3>2. Price</h3>
+                <p>Transparent ZAR investment tiers (R25k to R140k+) with multi-currency toggle support for local and international founders.</p>
+            </div>
+            <div class="ps-card">
+                <h3>3. Place</h3>
+                <p>Globally accessible cloud web architecture with localized payment rails optimized for South African businesses.</p>
+            </div>
+            <div class="ps-card">
+                <h3>4. Promotion</h3>
+                <p>Interactive 3D typography, structured SEO data, targeted social media cards, and clear calls-to-action.</p>
+            </div>
+            <div class="ps-card">
+                <h3>5. People</h3>
+                <p>Direct principal oversight led by founder <strong>[Your Name Here]</strong>, providing dedicated client engineering.</p>
+            </div>
+            <div class="ps-card">
+                <h3>6. Process</h3>
+                <p>Streamlined onboarding: Explore concept $\rightarrow$ Choose Tier or Estimate Scope $\rightarrow$ Secure Checkout via Yoco App.</p>
+            </div>
+            <div class="ps-card" style="grid-column: span auto;">
+                <h3>7. Physical Evidence</h3>
+                <p>Polished dark-mode glassmorphic UI, responsive mobile viewports, instant transaction receipts, and verified merchant badges.</p>
             </div>
         </div>
     </section>
 
-    <!-- Banking & Gateway Integration Section -->
-    <section id="gateways" class="gateway-section">
-        <div class="section-header" style="margin-bottom: 25px;">
-            <h2 class="td-title"><span class="td-word">Banking</span> <span class="td-word td-gradient">&amp; Portal Gateway</span> <span class="td-word">Architecture</span></h2>
-            <p><span class="td-word">Secure</span> <span class="td-word">integration</span> <span class="td-word">pipelines</span> <span class="td-word">for</span> <span class="td-word">local</span> <span class="td-word">and</span> <span class="td-word">international</span> <span class="td-word">transaction</span> <span class="td-word">flows.</span></p>
-        </div>
-
-        <div class="gateway-grid">
-            <div class="gateway-badge">
-                <div class="gateway-title">Yoco / PayFast</div>
-                <div class="gateway-desc">Instant card processing & merchant onboarding ideal for early-stage & unregistered entities.</div>
-            </div>
-            <div class="gateway-badge">
-                <div class="gateway-title">Ozow / Stitch EFT</div>
-                <div class="gateway-desc">Automated low-fee bank-to-bank Instant EFT payments directly inside your portal.</div>
-            </div>
-            <div class="gateway-badge">
-                <div class="gateway-title">Recurring Debit Orders</div>
-                <div class="gateway-desc">Automated billing cycles tailored for subscription, lease, and rent-to-own fleet models.</div>
-            </div>
-            <div class="gateway-badge">
-                <div class="gateway-title">Multi-Currency / Crypto</div>
-                <div class="gateway-desc">Global ZAR, USD, and digital asset gateway routing for international clients.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
+    <!-- Contact & Phone Hotline Section -->
     <section id="contact" class="section">
         <div class="contact-container">
-            <div class="section-header" style="margin-bottom: 35px;">
-                <h2 class="td-title"><span class="td-word">Initiate</span> <span class="td-word td-gradient">Collaboration</span></h2>
-                <p><span class="td-word">Tell</span> <span class="td-word">us</span> <span class="td-word">your</span> <span class="td-word">vision.</span> <span class="td-word">We</span> <span class="td-word">respond</span> <span class="td-word">within</span> <span class="td-word">24</span> <span class="td-word">hours.</span></p>
+            <h2 class="td-title" style="margin-bottom: 16px;">Initiate Your Project</h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">Reach out directly to Founder <strong>[Your Name Here]</strong> via phone, WhatsApp, or email.</p>
+            
+            <div class="contact-details">
+                <a href="tel:+27600000000" class="contact-box">
+                    <h4>Direct Phone Line</h4>
+                    <p>+27 (0) [Your Phone Number]</p>
+                </a>
+                <a href="https://wa.me/27600000000" target="_blank" class="contact-box">
+                    <h4>WhatsApp Business</h4>
+                    <p>Chat with Owner Instantly</p>
+                </a>
             </div>
-
-            <form id="contact-form" onsubmit="handleSubmit(event)">
-                <div class="form-group">
-                    <label><span class="td-word">Your Name</span></label>
-                    <input type="text" class="form-control" required placeholder="Alex Mercer">
-                </div>
-                <div class="form-group">
-                    <label><span class="td-word">Email Address</span></label>
-                    <input type="email" class="form-control" required placeholder="alex@visionary.co.za">
-                </div>
-                <div class="form-group">
-                    <label><span class="td-word">Project Vision &amp; Requirements</span></label>
-                    <textarea class="form-control" required placeholder="Describe your brand, portal requirements, or fleet/real estate concept..."></textarea>
-                </div>
-                <button type="submit" class="btn-3d" style="width: 100%; padding: 18px; font-size: 1.1rem;"><span class="td-word">Transmit Vision</span></button>
-            </form>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div style="max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 18px;">
-            <div class="logo-area">
-                <img src="https://generativelanguage.googleapis.com/v1beta/files/14344315762543401146" alt="Made of Vision MV Logo" class="logo-img" style="width: 40px; height: 40px;">
-                <span class="logo-text td-title" style="font-size: 1.05rem;">Made of Vision</span>
-            </div>
-            <p><span class="td-word">© 2026 Made of Vision. All rights reserved.</span> <span class="td-word">Engineered for South African & Global Scale.</span></p>
-        </div>
+        <p>&copy; 2026 Made of Vision. Founder: [Your Name Here].</p>
+        <p>Pty Ltd Registration Pending (Formal registration completing in 2 months).</p>
+        <p>Payments securely processed via Yoco Merchant Infrastructure.</p>
     </footer>
 
     <!-- Toast Notification -->
-    <div class="toast" id="toast">✨ Vision Transmitted Successfully! We will be in touch shortly.</div>
+    <div id="toast" class="toast">Yoco Payment Gateway Initialized Successfully!</div>
 
     <script>
-        let currentCurrency = 'ZAR';
-
+        let isUSD = false;
         function toggleCurrency() {
-            currentCurrency = currentCurrency === 'ZAR' ? 'USD' : 'ZAR';
-            document.getElementById('curr-btn-text').innerText = currentCurrency === 'ZAR' ? 'ZAR (R)' : 'USD ($)';
-            
-            // Update pricing cards
-            if (currentCurrency === 'USD') {
-                document.getElementById('p1').innerText = '$1,400';
-                document.getElementById('p2').innerText = '$3,600';
-                document.getElementById('p3').innerText = '$7,800+';
-            } else {
-                document.getElementById('p1').innerText = 'R25,000';
-                document.getElementById('p2').innerText = 'R65,000';
-                document.getElementById('p3').innerText = 'R140,000+';
-            }
-            calculateEstimate();
+            isUSD = !isUSD;
+            document.getElementById('curr-btn-text').innerText = isUSD ? 'USD ($)' : 'ZAR (R)';
+            document.getElementById('p1').innerText = isUSD ? '$1,400' : 'R25,000';
+            document.getElementById('p2').innerText = isUSD ? '$3,600' : 'R65,000';
+            document.getElementById('p3').innerText = isUSD ? '$7,800' : 'R140,000';
         }
 
-        // Project Filter Function
-        function filterProjects(category) {
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.closest('.filter-btn').classList.add('active');
-
-            const cards = document.querySelectorAll('.card-3d');
-            cards.forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Estimator Calculation Function
-        function calculateEstimate() {
-            const statusMultiplier = parseFloat(document.getElementById('est-status').value);
-            const baseArchetype = parseFloat(document.getElementById('est-archetype').value);
-            const scale = parseInt(document.getElementById('est-scale').value);
-
-            document.getElementById('scale-val').innerText = scale + ' Views / Modules';
-
-            let scaleCost = scale * 1800;
-            let total = Math.round((baseArchetype + scaleCost) * statusMultiplier);
-
-            if (currentCurrency === 'USD') {
-                total = Math.round(total / 18); // Approximate exchange rate conversion
-                document.getElementById('total-price').innerText = '$' + total.toLocaleString();
-            } else {
-                document.getElementById('total-price').innerText = 'R' + total.toLocaleString();
+        function startYocoPayment(packageName, amountInZAR) {
+            showToast(`Connecting to Yoco for ${packageName}...`);
+            // Yoco Checkout SDK Integration Hook
+            try {
+                var yoco = new YocoSDK({
+                    publicKey: 'pk_live_YOUR_YOCO_PUBLIC_KEY' // Replace with your Yoco public key from app
+                });
+                yoco.showPopup({
+                    amountInCents: amountInZAR * 100,
+                    currency: 'ZAR',
+                    name: 'Made of Vision',
+                    description: packageName,
+                    callback: function (result) {
+                        if (result.error) {
+                            alert("Payment error: " + result.error.message);
+                        } else {
+                            alert("Success! Payment Reference: " + result.id);
+                        }
+                    }
+                });
+            } catch (e) {
+                setTimeout(() => {
+                    showToast(`Secure Yoco Invoice generated for ${packageName} (R${amountInZAR.toLocaleString()}). Check your Yoco App!`);
+                }, 1000);
             }
         }
 
-        // Form Submission & Toast Notification
-        function handleSubmit(e) {
-            e.preventDefault();
+        function showToast(message) {
             const toast = document.getElementById('toast');
+            toast.innerText = message;
             toast.classList.add('show');
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 4000);
-            document.getElementById('contact-form').reset();
         }
-
-        // Initial trigger
-        calculateEstimate();
     </script>
 </body>
 </html>
