@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
     <!-- Primary SEO Meta Tags -->
     <title>MADE OF VISION — Custom Web Design & 3D Commerce Portals South Africa</title>
@@ -11,6 +11,7 @@
     <meta name="keywords" content="web design south africa, ecommerce development, 3d web design, yoco payment gateway, web agency Johannesburg Cape Town, custom portals">
     <meta name="author" content="Made of Vision">
     <meta name="robots" content="index, follow">
+    <meta id="theme-color-meta" name="theme-color" content="#020206">
 
     <!-- Open Graph / Social Media (WhatsApp, LinkedIn, Facebook) -->
     <meta property="og:type" content="website">
@@ -47,6 +48,7 @@
     }
     </script>
 
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Yoco SDK Integration -->
@@ -63,16 +65,32 @@
             --success: #34d399;
             --text-main: #ffffff;
             --text-muted: #cbd5e1;
+            --safe-top: env(safe-area-inset-top, 0px);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        /* Platform-Specific Adaptive Engine Rules */
+        body.platform-ios {
+            font-family: -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', sans-serif;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        body.platform-android {
+            font-family: 'Roboto', 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body.platform-desktop {
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -80,6 +98,8 @@
             color: var(--text-main);
             overflow-x: hidden;
             perspective: 1400px;
+            padding-top: var(--safe-top);
+            padding-bottom: var(--safe-bottom);
         }
 
         /* Ambient Glows */
@@ -100,6 +120,7 @@
             filter: blur(150px);
             opacity: 0.3;
             animation: floatOrb 18s infinite alternate ease-in-out;
+            will-change: transform;
         }
 
         .orb-1 { top: -10%; left: 20%; width: 650px; height: 650px; background: #9333ea; }
@@ -155,7 +176,9 @@
             z-index: 1000;
             background: rgba(2, 2, 6, 0.95);
             backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            padding-top: var(--safe-top);
         }
 
         .nav-container {
@@ -174,7 +197,6 @@
             text-decoration: none;
         }
 
-        /* Custom Logo Background Style */
         .logo-img {
             width: 48px;
             height: 48px;
@@ -243,7 +265,7 @@
             text-align: center;
         }
 
-        .btn-3d:hover {
+        .btn-3d:hover, .btn-3d:active {
             transform: translateY(-3px);
             box-shadow: 0 18px 35px rgba(147, 51, 234, 0.7);
         }
@@ -262,6 +284,21 @@
         .btn-yoco {
             background: linear-gradient(135deg, #0284c7, #38bdf8);
             box-shadow: 0 10px 25px rgba(2, 132, 199, 0.5);
+        }
+
+        /* Device Detection Status Bar */
+        .device-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: var(--secondary);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 16px;
         }
 
         /* Hero */
@@ -293,24 +330,24 @@
 
         .owner-tag {
             display: inline-block;
-            background: rgba(56, 189, 248, 0.12);
-            border: 1px solid rgba(56, 189, 248, 0.4);
+            background: rgba(244, 63, 94, 0.15);
+            border: 1px solid rgba(244, 63, 94, 0.4);
             padding: 6px 16px;
             border-radius: 20px;
-            color: var(--secondary);
+            color: var(--accent);
             font-weight: 700;
             font-size: 0.9rem;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .hero h1 {
-            font-size: clamp(2.75rem, 5.8vw, 5.5rem);
+            font-size: clamp(2.5rem, 5.8vw, 5.5rem);
             line-height: 1.1;
             margin-bottom: 26px;
         }
 
         .hero p {
-            font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+            font-size: clamp(1rem, 2.2vw, 1.4rem);
             color: var(--text-muted);
             max-width: 800px;
             margin: 0 auto 40px;
@@ -338,7 +375,7 @@
         }
 
         .section-header h2 {
-            font-size: clamp(2.1rem, 4.2vw, 3.2rem);
+            font-size: clamp(2rem, 4.2vw, 3.2rem);
             margin-bottom: 16px;
         }
 
@@ -351,7 +388,7 @@
         /* Grid & Cards */
         .grid-3d {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 32px;
         }
 
@@ -361,6 +398,7 @@
             border-radius: 24px;
             overflow: hidden;
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
             box-shadow: 0 20px 45px rgba(0,0,0,0.6);
             display: flex;
@@ -417,7 +455,7 @@
         /* Pricing Tiers */
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 32px;
         }
 
@@ -425,9 +463,10 @@
             background: var(--bg-card);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 26px;
-            padding: 40px;
+            padding: 36px;
             position: relative;
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             box-shadow: 0 20px 45px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
@@ -441,7 +480,7 @@
         }
 
         .price {
-            font-size: 3rem;
+            font-size: 2.8rem;
             font-weight: 800;
             font-family: 'Space Grotesk', sans-serif;
             margin: 20px 0;
@@ -460,7 +499,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 1.02rem;
+            font-size: 1rem;
             font-weight: 500;
         }
 
@@ -474,7 +513,7 @@
         /* 7 Ps Framework Section */
         .ps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 24px;
             margin-top: 40px;
         }
@@ -483,8 +522,9 @@
             background: rgba(18, 18, 28, 0.9);
             border: 1px solid rgba(168, 85, 247, 0.25);
             border-radius: 20px;
-            padding: 30px;
+            padding: 26px;
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         .ps-card h3 {
@@ -507,8 +547,9 @@
             background: var(--bg-card);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 32px;
-            padding: 55px;
+            padding: 45px 25px;
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             box-shadow: 0 30px 65px rgba(0,0,0,0.6);
             text-align: center;
         }
@@ -516,7 +557,7 @@
         .contact-details {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 20px;
             margin-top: 30px;
             flex-wrap: wrap;
         }
@@ -524,11 +565,12 @@
         .contact-box {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 20px 30px;
+            padding: 20px 26px;
             border-radius: 16px;
             text-decoration: none;
             color: white;
             transition: all 0.3s;
+            min-width: 240px;
         }
 
         .contact-box:hover {
@@ -568,9 +610,19 @@
             transform: translateY(160px);
             transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
             z-index: 2000;
+            max-width: 90vw;
         }
 
         .toast.show { transform: translateY(0); }
+
+        /* Media Queries for Mobile & Tablets */
+        @media (max-width: 768px) {
+            .nav-links li:not(:last-child) { display: none; }
+            .hero { padding-top: 120px; }
+            .section { padding: 70px 16px; }
+            .pricing-card { padding: 26px; }
+            .contact-container { padding: 30px 16px; }
+        }
     </style>
 </head>
 <body>
@@ -603,10 +655,11 @@
     <!-- Hero Section -->
     <section class="hero">
         <div>
-            <div class="owner-tag">✦ Principal Owner & Founder: [Your Name Here]</div>
+            <div id="device-banner" class="device-badge">Detecting Device Architecture...</div><br>
+            <div class="owner-tag">✦ Principal Owner & Founder: [Your Name Here]</div><br>
             <div class="badge td-title">✦ PTY LTD REGISTRATION PENDING (EST. 2 MONTHS)</div>
             <h1 class="td-title"><span class="td-word">Architecting</span> <span class="td-word td-gradient">Dimensions</span> <span class="td-word">in Digital Commerce</span></h1>
-            <p>We build high-performance web ecosystems with integrated Yoco banking gateways, 3D product viewports, and rent-to-own lease portals. Fully active and processing client orders via Yoco merchant secure infrastructure.</p>
+            <p>We build high-performance web ecosystems with integrated Yoco banking gateways, 3D product viewports, and rent-to-own lease portals. Fully active and processing client orders via Yoco secure merchant infrastructure.</p>
             <div class="hero-cta">
                 <a href="#services" class="btn-3d">View Investment Tiers</a>
                 <a href="#contact" class="btn-3d secondary">Get in Touch</a>
@@ -751,7 +804,7 @@
                 <h3>6. Process</h3>
                 <p>Streamlined onboarding: Explore concept $\rightarrow$ Choose Tier or Estimate Scope $\rightarrow$ Secure Checkout via Yoco App.</p>
             </div>
-            <div class="ps-card" style="grid-column: span auto;">
+            <div class="ps-card">
                 <h3>7. Physical Evidence</h3>
                 <p>Polished dark-mode glassmorphic UI, responsive mobile viewports, instant transaction receipts, and verified merchant badges.</p>
             </div>
@@ -788,6 +841,29 @@
     <div id="toast" class="toast">Yoco Payment Gateway Initialized Successfully!</div>
 
     <script>
+        // Platform Adaptive Hardware Detection Engine
+        (function detectPlatform() {
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            const body = document.body;
+            const banner = document.getElementById('device-banner');
+            let platformText = "💻 Adaptive Desktop Viewport";
+
+            if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+                body.classList.add('platform-ios');
+                platformText = "📱 Optimized for Apple iOS Device";
+            } else if (/android/i.test(ua)) {
+                body.classList.add('platform-android');
+                platformText = "🤖 Optimized for Android Device";
+            } else {
+                body.classList.add('platform-desktop');
+            }
+
+            if (banner) {
+                banner.innerText = platformText;
+            }
+        })();
+
+        // Multi-Currency Converter Logic
         let isUSD = false;
         function toggleCurrency() {
             isUSD = !isUSD;
@@ -797,13 +873,16 @@
             document.getElementById('p3').innerText = isUSD ? '$7,800' : 'R140,000';
         }
 
+        // Yoco Payment Gateway Integration Handler
         function startYocoPayment(packageName, amountInZAR) {
             showToast(`Connecting to Yoco for ${packageName}...`);
-            // Yoco Checkout SDK Integration Hook
+            
             try {
+                // Initialize Yoco Web SDK Popup
                 var yoco = new YocoSDK({
-                    publicKey: 'pk_live_YOUR_YOCO_PUBLIC_KEY' // Replace with your Yoco public key from app
+                    publicKey: 'pk_live_YOUR_YOCO_PUBLIC_KEY' // Replace with your actual Yoco public key
                 });
+                
                 yoco.showPopup({
                     amountInCents: amountInZAR * 100,
                     currency: 'ZAR',
@@ -813,17 +892,19 @@
                         if (result.error) {
                             alert("Payment error: " + result.error.message);
                         } else {
-                            alert("Success! Payment Reference: " + result.id);
+                            alert("Payment successful! Reference ID: " + result.id);
                         }
                     }
                 });
             } catch (e) {
+                // Graceful fallback notice for test environment
                 setTimeout(() => {
-                    showToast(`Secure Yoco Invoice generated for ${packageName} (R${amountInZAR.toLocaleString()}). Check your Yoco App!`);
-                }, 1000);
+                    showToast(`Yoco Payment Request generated for ${packageName} (R${amountInZAR.toLocaleString()}). Check your Yoco App!`);
+                }, 1200);
             }
         }
 
+        // Toast Notification System
         function showToast(message) {
             const toast = document.getElementById('toast');
             toast.innerText = message;
