@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://imeraanmatthys35-dev.github.io/Made-of-Vision/sitemap.xml
